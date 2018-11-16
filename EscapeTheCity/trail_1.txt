@@ -1,0 +1,3 @@
+52.629919,1.296925,What colour is the bin?,Green
+52.629917,1.296578,How many doors on BHF?,1
+52.629854,1.296268,What number is on the Barclays building?,57
