@@ -40,7 +40,7 @@ public class TrailClue {
 
     public double distanceFromPhone(double phoneLat, double phoneLong){
 
-        System.out.println("Phone lat: "+phoneLat+" Phone long: "+phoneLong);
+        //System.out.println("Phone lat: "+phoneLat+" Phone long: "+phoneLong);
 
         double diffLat = Math.abs(phoneLat-latitude);
         double diffLong = Math.abs(phoneLong-longitude);

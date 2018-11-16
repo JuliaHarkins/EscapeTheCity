@@ -97,18 +97,17 @@ public class Main extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Intent intentMain = new Intent(Main.this ,
-                        TrailListActivity.class);
-                startActivity(intentMain);
+                Intent i = new Intent(getApplicationContext(),TrailListActivity.class);
+                startActivity(i);
             }
         });
     }
 
     private void queryTrails(){
         for(TrailClue tc : tempClues){
-            Log.log("Is clue nearby: "+tc.isClueInRange(latitude,longitude));
+            //Log.log("Is clue nearby: "+tc.isClueInRange(latitude,longitude));
         }
-        System.out.println("Phone lat: "+latitude+" Phone long: "+longitude);
+        //System.out.println("Phone lat: "+latitude+" Phone long: "+longitude);
     }
 
     @Override
