@@ -17,21 +17,28 @@ public class TrailClue {
         this.answer=answer;
     }
 
-    public boolean isClueInRange(){
-        Location result = new Location(LocationManager.GPS_PROVIDER);
-        double phoneLat = result.getLatitude();
-        double phoneLong = result.getLongitude();
+    public boolean isClueInRange(double phoneLat, double phoneLong){
 
         double diffLat = Math.abs(phoneLat-latitude);
         double diffLong = Math.abs(phoneLong-longitude);
 
-        return(diffLat < CLUE_RADIUS && diffLong < CLUE_RADIUS);
+        return(distanceBetweenPoints(latitude,longitude,phoneLat,phoneLong)<CLUE_RADIUS);
     }
 
-    public double distanceFromPhone(){
-        Location result = new Location(LocationManager.GPS_PROVIDER);
-        double phoneLat = result.getLatitude();
-        double phoneLong = result.getLongitude();
+    public String getClue(){
+        return clue;
+    }
+
+    public boolean isAnswerCorrect(String answer){
+        isFinished=true;
+        return(this.answer.contains(answer));
+    }
+
+    public boolean isFinished(){
+        return isFinished;
+    }
+
+    public double distanceFromPhone(double phoneLat, double phoneLong){
 
         System.out.println("Phone lat: "+phoneLat+" Phone long: "+phoneLong);
 
