@@ -17,7 +17,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textMultiLine"
+        android:inputType="none"
         android:text="I am always there, some distance away, somewhere between land and sky I lay, you may move toward me, yet distant I'll stay. What am I?"
         app:layout_constraintBottom_toTopOf="@+id/btn_submitClue"
         app:layout_constraintEnd_toEndOf="parent"
