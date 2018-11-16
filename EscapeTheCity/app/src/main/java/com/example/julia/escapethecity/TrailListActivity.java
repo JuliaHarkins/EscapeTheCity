@@ -46,7 +46,7 @@ public class TrailListActivity extends Activity {
     }
 
     public void switchScreen(){
-        Intent i = new Intent(getApplicationContext(),TrailStartActivity.class);
+        Intent i = new Intent(getApplicationContext(),LocationRiddleActivity.class);
         startActivity(i);
     }
 }

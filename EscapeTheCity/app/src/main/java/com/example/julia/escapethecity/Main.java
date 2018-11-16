@@ -102,7 +102,7 @@ public class Main extends AppCompatActivity{
             }
         });
 
-        final Button leaderboards = findViewById(R.id.btn_leaderBoard);
+        final Button leaderboards = findViewById(R.id.btn_showLeaderboard);
         leaderboards.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
