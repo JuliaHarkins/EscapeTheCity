@@ -7,22 +7,20 @@
     android:layout_height="match_parent">
 
 
-    <TextView
+<!--    <TextView
         android:id="@+id/textView"
         style="@style/FormLabel"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/default_element_height"
         android:layout_marginStart="154dp"
-        android:layout_marginLeft="154dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="154dp"
-        android:layout_marginRight="154dp"
         android:text="VICTORY!"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
         android:id="@+id/txt_time"

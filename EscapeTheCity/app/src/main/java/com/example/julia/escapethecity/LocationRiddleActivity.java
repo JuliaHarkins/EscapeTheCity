@@ -79,6 +79,7 @@ public class LocationRiddleActivity extends Activity {
         if(trail.isTrailFinished()){
             Intent i = new Intent(getApplicationContext(),LeaderBoardActivity.class);
             startActivity(i);
+            handler.removeCallbacks(runnable);
         }else{
 
             TrailClue tc = trail.getCurrentClue();
@@ -86,8 +87,10 @@ public class LocationRiddleActivity extends Activity {
             EditText tb = findViewById(R.id.txt_answerBox);
             Button submit = findViewById(R.id.btn_submitAnswer);
 
-            tb.setEnabled(tc.isClueInRange(Main.latitude,Main.longitude));
-            submit.setEnabled(tc.isClueInRange(Main.latitude,Main.longitude));
+            int v = (tc.isClueInRange(Main.latitude,Main.longitude)) ? View.VISIBLE : View.INVISIBLE;
+
+            tb.setVisibility(v);
+            submit.setVisibility(v);
         }
     }
 }

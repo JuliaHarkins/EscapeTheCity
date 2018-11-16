@@ -6,24 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/lb_leaderboard"
-        style="@style/FormLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_element_height"
-        android:layout_marginStart="123dp"
-        android:layout_marginLeft="123dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginRight="124dp"
-        android:layout_marginBottom="30dp"
-        android:text="LEADERBOARD"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_trail1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--<TextView-->
+        <!--android:id="@+id/lb_leaderboard"-->
+        <!--style="@style/FormLabel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/default_element_height"-->
+        <!--android:layout_marginStart="123dp"-->
+        <!--android:layout_marginLeft="123dp"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--android:layout_marginEnd="124dp"-->
+        <!--android:layout_marginRight="124dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:text="LEADERBOARD"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+        <!--android:textSize="24sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/txt_trail1"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
         android:id="@+id/txt_trail1"

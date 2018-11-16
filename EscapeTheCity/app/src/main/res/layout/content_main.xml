@@ -8,16 +8,6 @@
     tools:context=".Main"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/lb_login"
-        style="@style/FormLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_element_height"
-        android:text="LOGIN"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="128dp" />
     <EditText
         android:id="@+id/txt_username"
         android:layout_width="wrap_content"
