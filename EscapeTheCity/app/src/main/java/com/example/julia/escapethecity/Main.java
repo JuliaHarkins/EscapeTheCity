@@ -1,6 +1,7 @@
 package com.example.julia.escapethecity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -96,6 +97,9 @@ public class Main extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                Intent intentMain = new Intent(Main.this ,
+                        TrailListActivity.class);
+                startActivity(intentMain);
             }
         });
     }
