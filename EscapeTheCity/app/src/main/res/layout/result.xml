@@ -6,21 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txt_resultHeader"
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/FormLabel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginLeft="98dp"
+        android:layout_height="@dimen/default_element_height"
+        android:layout_marginStart="154dp"
+        android:layout_marginLeft="154dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginRight="99dp"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:inputType="none"
-        android:textSize="24dp"
-        android:text="Results"
-        app:layout_constraintBottom_toTopOf="@+id/txt_time"
+        android:layout_marginEnd="154dp"
+        android:layout_marginRight="154dp"
+        android:text="VICTORY!"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
         android:layout_marginLeft="98dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="99dp"
         android:layout_marginRight="99dp"
         android:layout_marginBottom="10dp"
@@ -41,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_rank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_resultHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/txt_rank"
@@ -52,11 +51,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="99dp"
         android:layout_marginRight="99dp"
-        android:layout_marginBottom="388dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="none"
         android:text="Second Place!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_leaderBoard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_time" />
@@ -70,8 +69,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="144dp"
         android:layout_marginRight="144dp"
-        android:layout_marginBottom="326dp"
-        android:text="Leader Board"
+        android:layout_marginBottom="333dp"
+        android:text="LeaderBoard"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
