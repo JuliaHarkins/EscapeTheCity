@@ -101,6 +101,15 @@ public class Main extends AppCompatActivity{
                 startActivity(i);
             }
         });
+
+        final Button leaderboards = findViewById(R.id.btn_leaderBoard);
+        leaderboards.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent i = new Intent(getApplicationContext(),LeaderBoardActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void queryTrails(){
