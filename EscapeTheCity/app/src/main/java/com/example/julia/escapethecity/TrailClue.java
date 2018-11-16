@@ -5,7 +5,7 @@ import android.location.LocationManager;
 
 public class TrailClue {
 
-    public static final double CLUE_RADIUS = 5;
+    public static final double CLUE_RADIUS = 15;
     double latitude, longitude;
     String clue, answer;
     boolean isFinished=false;
@@ -38,14 +38,16 @@ public class TrailClue {
         return isFinished;
     }
 
-    public double distanceFromPhone(double phoneLat, double phoneLong){
+    public double distanceFromPhone(double phoneLat, double phoneLong,double phoneEl){
 
         //System.out.println("Phone lat: "+phoneLat+" Phone long: "+phoneLong);
 
         double diffLat = Math.abs(phoneLat-latitude);
         double diffLong = Math.abs(phoneLong-longitude);
 
-        return distanceBetweenPoints(latitude,longitude,phoneLat,phoneLong);
+        //return distanceBetweenPoints(latitude,longitude,phoneLat,phoneLong);
+        //return Trail.distance(latitude,phoneLat,longitude,phoneLong,phoneEl,phoneEl);
+        return Trail.distance(phoneLat,latitude,phoneLong,longitude,phoneEl,phoneEl);
     }
 
     private double distanceBetweenPoints(double lat1, double lon1, double lat2, double lon2){

@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputEditText;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.InputStream;
 
@@ -21,6 +22,7 @@ public class LocationRiddleActivity extends Activity {
         public void run() {
             secondsDelayed++;
             queryTrails();
+            debug();
             handler.postDelayed(this, 1000);
         }
     };
@@ -46,6 +48,12 @@ public class LocationRiddleActivity extends Activity {
         });
 
         updateClueBox();
+    }
+
+    public void debug(){
+        TextView tv = findViewById(R.id.txt_debug);
+        String debug = "Phone lat: "+Main.latitude+" long: "+Main.longitude+" Clue lat: "+trail.getCurrentClue().latitude+" clue long "+trail.getCurrentClue().longitude+ " distance: "+trail.getCurrentClue().distanceFromPhone(Main.latitude,Main.longitude,Main.elevation);
+        tv.setText(debug);
     }
 
     public void updateClueBox(){

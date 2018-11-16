@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Main extends AppCompatActivity{
 
     LocationManager lm;
-    public static double latitude,longitude;
+    public static double latitude,longitude,elevation;
 
     ArrayList<TrailClue> tempClues = new ArrayList<TrailClue>();
     ArrayList<TrailClue> demoTrail = new ArrayList<TrailClue>();
@@ -70,6 +70,7 @@ public class Main extends AppCompatActivity{
                 //Log.log("IN ON LOCATION CHANGE, lat=" + location.getLatitude() + ", lon=" + location.getLongitude());
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                elevation = location.getAltitude();
             }
         };
 
