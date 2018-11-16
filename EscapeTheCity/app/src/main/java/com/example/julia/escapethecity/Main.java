@@ -14,15 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
 public class Main extends AppCompatActivity{
 
     LocationManager lm;
-    double latitude,longitude;
+    public static double latitude,longitude;
 
     ArrayList<TrailClue> tempClues = new ArrayList<TrailClue>();
+    ArrayList<TrailClue> demoTrail = new ArrayList<TrailClue>();
     private CountDownTimer timer;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
@@ -64,7 +66,7 @@ public class Main extends AppCompatActivity{
 
             @Override
             public void onLocationChanged(Location location) {
-                Log.log("IN ON LOCATION CHANGE, lat=" + location.getLatitude() + ", lon=" + location.getLongitude());
+                //Log.log("IN ON LOCATION CHANGE, lat=" + location.getLatitude() + ", lon=" + location.getLongitude());
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
             }
@@ -84,13 +86,23 @@ public class Main extends AppCompatActivity{
 
         handler.postDelayed(runnable, 1000);
 
+        addButtonHandlers();
 
+    }
 
+    private void addButtonHandlers(){
+        // Login button
+        final Button button = findViewById(R.id.btn_login);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+            }
+        });
     }
 
     private void queryTrails(){
         for(TrailClue tc : tempClues){
-            //Log.log("Is clue nearby: "+tc.isClueInRange())+" Distance: "+tc.distanceFromPhone();
+            Log.log("Is clue nearby: "+tc.isClueInRange(latitude,longitude));
         }
         System.out.println("Phone lat: "+latitude+" Phone long: "+longitude);
     }
