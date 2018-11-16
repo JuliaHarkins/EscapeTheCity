@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.io.InputStream;
 
 public class LocationRiddleActivity extends Activity {
@@ -32,6 +34,8 @@ public class LocationRiddleActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_UserLocation);
+        //bmapFragment.getMapAsync(this);
 
         setContentView(R.layout.locationriddle);
 
