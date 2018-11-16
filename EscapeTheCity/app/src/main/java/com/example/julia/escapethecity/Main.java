@@ -90,7 +90,7 @@ public class Main extends AppCompatActivity{
 
     private void queryTrails(){
         for(TrailClue tc : tempClues){
-            Log.log("Is clue nearby: "+tc.isClueInRange())+" Distance: "+tc.distanceFromPhone();
+            //Log.log("Is clue nearby: "+tc.isClueInRange())+" Distance: "+tc.distanceFromPhone();
         }
         System.out.println("Phone lat: "+latitude+" Phone long: "+longitude);
     }
