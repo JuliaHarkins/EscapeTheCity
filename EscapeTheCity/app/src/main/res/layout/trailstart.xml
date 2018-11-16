@@ -28,7 +28,7 @@
         android:layout_marginRight="96dp"
         android:layout_marginBottom="201dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:text="Trail Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
