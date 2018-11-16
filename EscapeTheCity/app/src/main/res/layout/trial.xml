@@ -59,28 +59,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_trail2" />
 
-    <Button
-        android:id="@+id/btn_trail1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trail 1"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="259dp" />
-
-    <Button
-        android:id="@+id/btn_trail2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trail 2"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="330dp" />
-
-    <Button
-        android:id="@+id/btn_trail3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trail 3"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="406dp" />
-
 </android.support.constraint.ConstraintLayout>
