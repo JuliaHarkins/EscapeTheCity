@@ -4,15 +4,24 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableSet;
 import java.util.Scanner;
+import java.util.TimeZone;
 import java.util.TreeMap;
 
 public class LeaderBoardActivity extends Activity {
 
     TreeMap<Integer,String> leaderBoard = new TreeMap<>();
+    int seconds;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -21,10 +30,12 @@ public class LeaderBoardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard);
 
-        //loadLeaderboard();
-        //newEntry();
-        //displayLeaderboard();
-        //saveLeaderboard();
+        seconds = getIntent().getIntExtra("secondsDelayed",0);
+
+        loadLeaderboard();
+        newEntry();
+        displayLeaderboard();
+        saveLeaderboard();
 
         Log.log("Finished creating leaderboard");
     }
@@ -32,6 +43,39 @@ public class LeaderBoardActivity extends Activity {
     public void displayLeaderboard(){
         RecyclerView rv = findViewById(R.id.txt_leaderboardList);
         //rv.
+        EditText et1 = findViewById(R.id.txt_leader1);
+        EditText et2 = findViewById(R.id.txt_leader2);
+        EditText et3 = findViewById(R.id.txt_leader3);
+
+        NavigableSet<Integer> sortedKeys = leaderBoard.descendingKeySet();
+        Iterator<Integer> i = sortedKeys.descendingIterator();
+
+        int time1 = i.next();
+        int time2 = i.next();
+        int time3 = i.next();
+
+        et1.setText(getFormattedEntry(leaderBoard.get(time1),time1));
+        et2.setText(getFormattedEntry(leaderBoard.get(time2),time2));
+        et3.setText(getFormattedEntry(leaderBoard.get(time3),time3));
+
+        et1.setText(getFormattedEntry(Main.username,this.seconds));
+
+        et1.clearFocus();
+        et2.clearFocus();
+        et3.clearFocus();
+
+    }
+
+    private String getFormattedEntry(String name, int numSeconds){
+
+        String result = "";
+
+        Date d = new Date(numSeconds * 1000L);
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss"); // HH for 0-23
+        df.setTimeZone(TimeZone.getTimeZone("GMT"));
+        String time = df.format(d);
+
+        return result+name+" : "+time;
     }
 
     public void newEntry(){

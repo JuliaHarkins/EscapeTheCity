@@ -5,7 +5,7 @@ import android.location.LocationManager;
 
 public class TrailClue {
 
-    public static final double CLUE_RADIUS = 2500;
+    public static final double CLUE_RADIUS = 2000;
     double latitude, longitude;
     String clue, answer;
     boolean isFinished=false;

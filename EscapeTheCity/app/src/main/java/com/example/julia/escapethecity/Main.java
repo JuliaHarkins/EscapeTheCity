@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -98,6 +99,8 @@ public class Main extends AppCompatActivity{
             public void onClick(View v) {
 
                 username = findViewById(R.id.txt_username).toString();
+                EditText et = findViewById(R.id.txt_username);
+                username=et.getText().toString();
 
                 // Code here executes on main thread after user presses button
                 Intent i = new Intent(getApplicationContext(),TrailListActivity.class);

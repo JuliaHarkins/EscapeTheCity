@@ -19,13 +19,13 @@
         android:text="LEADERBOARD"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_trail1"
+        app:layout_constraintBottom_toTopOf="@+id/txt_leader1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txt_trail1"
+        android:id="@+id/txt_leader1"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="98dp"
@@ -37,14 +37,14 @@
         android:ems="10"
         android:inputType="none"
         android:text="1st: Nigel"
-        app:layout_constraintBottom_toTopOf="@+id/txt_trail2"
+        app:layout_constraintBottom_toTopOf="@+id/txt_leader2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
-        android:id="@+id/txt_trail2"
+        android:id="@+id/txt_leader2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
@@ -56,13 +56,13 @@
         android:ems="10"
         android:inputType="none"
         android:text="You"
-        app:layout_constraintBottom_toTopOf="@+id/txt_trail3"
+        app:layout_constraintBottom_toTopOf="@+id/txt_leader3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_trail1" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_leader1" />
 
     <EditText
-        android:id="@+id/txt_trail3"
+        android:id="@+id/txt_leader3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_trail2" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_leader2" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/txt_leaderboardList"
