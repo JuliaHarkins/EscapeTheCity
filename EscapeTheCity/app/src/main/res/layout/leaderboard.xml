@@ -79,4 +79,11 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_trail2" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/txt_leaderboardList"
+        android:layout_width="395dp"
+        android:layout_height="317dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="278dp" />
 </android.support.constraint.ConstraintLayout>

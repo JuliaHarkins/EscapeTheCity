@@ -62,12 +62,12 @@
 
     <TextView
         android:id="@+id/txt_debug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="334dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="274dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="63dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

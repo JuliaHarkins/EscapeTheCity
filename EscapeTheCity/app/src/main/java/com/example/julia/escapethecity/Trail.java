@@ -18,7 +18,7 @@ public class Trail {
     }
 
     public boolean isTrailFinished(){
-        return currentClue >= clues.size() -1;
+        return currentClue > clues.size() -1;
     }
 
     public TrailClue getCurrentClue(){

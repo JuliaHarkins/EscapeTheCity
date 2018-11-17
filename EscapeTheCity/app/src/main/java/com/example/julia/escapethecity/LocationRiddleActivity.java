@@ -17,19 +17,30 @@ import java.io.InputStream;
 
 public class LocationRiddleActivity extends Activity {
 
+    private int gpsCoolDown = 0;
+    private final int MAX_GPS_COOLDOWN = 30;
+
+
+    Trail trail;
+
     private Handler handler = new Handler();
     private int secondsDelayed;
+
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            secondsDelayed++;
-            queryTrails();
-            debug();
-            handler.postDelayed(this, 1000);
+                gpsCoolDown--;
+                if (gpsCoolDown < 0)
+                    gpsCoolDown = 0;
+                secondsDelayed++;
+                queryTrails();
+                debug();
+
+                    handler.postDelayed(this, 1000);
+                
+
         }
     };
-
-    Trail trail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +72,10 @@ public class LocationRiddleActivity extends Activity {
     }
 
     public void updateClueBox(){
-        EditText clueBox = findViewById(R.id.txt_locationRiddle);
-        clueBox.setText(trail.getCurrentClue().getClue());
+        String clue = trail.getCurrentClue().getClue();
+        TextView clueBox = findViewById(R.id.txt_locationRiddle);
+        clueBox.setText(clue);
+        Log.log("Text view: "+clueBox+" changed text to: "+clue);
     }
 
     public void processAnswer(){
@@ -70,17 +83,21 @@ public class LocationRiddleActivity extends Activity {
         String answer = et.getText().toString();
         if(trail.getCurrentClue().isAnswerCorrect(answer)){
             trail.advance();
-
+            updateClueBox();
         }
     }
 
     public void queryTrails(){
 
+        Log.log("queryTrails is trail finished: "+trail.isTrailFinished());
+
         if(trail.isTrailFinished()){
+
+            handler.removeCallbacks(runnable);
+            Log.log("handler removed");
             Intent i = new Intent(getApplicationContext(),LeaderBoardActivity.class);
             i.putExtra("secondsDelayed",secondsDelayed);
             startActivity(i);
-            handler.removeCallbacks(runnable);
         }else{
 
             TrailClue tc = trail.getCurrentClue();
@@ -88,7 +105,12 @@ public class LocationRiddleActivity extends Activity {
             EditText tb = findViewById(R.id.txt_answerBox);
             Button submit = findViewById(R.id.btn_submitAnswer);
 
-            int v = (tc.isClueInRange(Main.latitude,Main.longitude)) ? View.VISIBLE : View.INVISIBLE;
+            //int v = (tc.isClueInRange(Main.latitude,Main.longitude)) ? View.VISIBLE : View.INVISIBLE;
+            int v = (gpsCoolDown>0) ? View.VISIBLE : View.INVISIBLE;
+
+            if(tc.isClueInRange(Main.latitude,Main.longitude)){
+                gpsCoolDown=MAX_GPS_COOLDOWN;
+            }
 
             tb.setVisibility(v);
             submit.setVisibility(v);
