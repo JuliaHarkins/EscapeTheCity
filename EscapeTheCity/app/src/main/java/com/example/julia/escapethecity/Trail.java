@@ -18,11 +18,21 @@ public class Trail {
     }
 
     public boolean isTrailFinished(){
-        return currentClue > clues.size() -1;
+
+        //Log.log("isTrailFinished - currentClue = "+currentClue+" clues.size = "+clues.size());
+
+        return currentClue >= clues.size();
     }
 
     public TrailClue getCurrentClue(){
-        return clues.get(currentClue);
+
+
+        try {
+            return clues.get(currentClue);
+        }catch(Exception e){
+            Log.log(e.getMessage());
+            return clues.get(clues.size()-1);
+        }
     }
 
     public void formFile(File textFile){

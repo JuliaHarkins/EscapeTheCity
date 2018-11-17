@@ -18,7 +18,7 @@ import java.io.InputStream;
 public class LocationRiddleActivity extends Activity {
 
     private int gpsCoolDown = 0;
-    private final int MAX_GPS_COOLDOWN = 30;
+    private final int MAX_GPS_COOLDOWN = 5;
 
 
     Trail trail;
@@ -29,15 +29,16 @@ public class LocationRiddleActivity extends Activity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            if(!trail.isTrailFinished()) {
                 gpsCoolDown--;
                 if (gpsCoolDown < 0)
                     gpsCoolDown = 0;
                 secondsDelayed++;
                 queryTrails();
                 debug();
+                handler.postDelayed(this, 1000);
+            }
 
-                    handler.postDelayed(this, 1000);
-                
 
         }
     };
@@ -63,11 +64,24 @@ public class LocationRiddleActivity extends Activity {
         });
 
         updateClueBox();
+        TrailClue tc = trail.getCurrentClue();
+        EditText tb = findViewById(R.id.txt_answerBox);
+        Button submit = findViewById(R.id.btn_submitAnswer);
+
+        //int v = (tc.isClueInRange(Main.latitude,Main.longitude)) ? View.VISIBLE : View.INVISIBLE;
+        int v = (gpsCoolDown>0) ? View.VISIBLE : View.INVISIBLE;
+
+        if(tc.isClueInRange(Main.latitude,Main.longitude)){
+            gpsCoolDown=MAX_GPS_COOLDOWN;
+        }
+
+        tb.setVisibility(v);
+        submit.setVisibility(v);
     }
 
     public void debug(){
         TextView tv = findViewById(R.id.txt_debug);
-        String debug = "Phone lat: "+Main.latitude+" long: "+Main.longitude+" Clue lat: "+trail.getCurrentClue().latitude+" clue long "+trail.getCurrentClue().longitude+ " distance: "+trail.getCurrentClue().distanceFromPhone(Main.latitude,Main.longitude,Main.elevation);
+        String debug = "Clue Radius: "+TrailClue.CLUE_RADIUS+ "Phone lat: "+Main.latitude+" long: "+Main.longitude+" Clue lat: "+trail.getCurrentClue().latitude+" clue long "+trail.getCurrentClue().longitude+ " distance: "+trail.getCurrentClue().distanceFromPhone(Main.latitude,Main.longitude,Main.elevation);
         tv.setText(debug);
     }
 
@@ -82,25 +96,35 @@ public class LocationRiddleActivity extends Activity {
         EditText et = findViewById(R.id.txt_answerBox);
         String answer = et.getText().toString();
         if(trail.getCurrentClue().isAnswerCorrect(answer)){
+            gpsCoolDown=0;
             trail.advance();
+            if(trail.isTrailFinished()){
+                Log.log("Trail finished - within processAnswer. Attempting to switch to leaderboard");
+                //handler.removeCallbacks(runnable);
+                Intent i = new Intent(getApplicationContext(),LeaderBoardActivity.class);
+                i.putExtra("secondsDelayed",secondsDelayed);
+                startActivity(i);
+            }
+
             updateClueBox();
         }
     }
 
     public void queryTrails(){
 
-        Log.log("queryTrails is trail finished: "+trail.isTrailFinished());
+        //Log.log("queryTrails is trail finished: "+trail.isTrailFinished());
 
         if(trail.isTrailFinished()){
 
-            handler.removeCallbacks(runnable);
-            Log.log("handler removed");
+            /*handler.removeCallbacks(runnable);
             Intent i = new Intent(getApplicationContext(),LeaderBoardActivity.class);
             i.putExtra("secondsDelayed",secondsDelayed);
-            startActivity(i);
+            startActivity(i);*/
         }else{
 
             TrailClue tc = trail.getCurrentClue();
+
+            //Log.log("Trail is not finished, trail clue is : "+tc);
 
             EditText tb = findViewById(R.id.txt_answerBox);
             Button submit = findViewById(R.id.btn_submitAnswer);

@@ -21,10 +21,10 @@ public class LeaderBoardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard);
 
-        loadLeaderboard();
-        newEntry();
-        displayLeaderboard();
-        saveLeaderboard();
+        //loadLeaderboard();
+        //newEntry();
+        //displayLeaderboard();
+        //saveLeaderboard();
 
         Log.log("Finished creating leaderboard");
     }
