@@ -34,8 +34,8 @@ public class LocationRiddleActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_UserLocation);
-        //bmapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_UserLocation);
+        bmapFragment.getMapAsync(this);
 
         setContentView(R.layout.locationriddle);
 
