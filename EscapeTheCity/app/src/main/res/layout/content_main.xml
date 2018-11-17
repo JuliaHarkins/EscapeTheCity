@@ -10,14 +10,18 @@
 
     <TextView
         android:id="@+id/lb_login"
-        style="@style/FormLabel"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_element_height"
+        android:layout_height="40dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="244dp"
+        android:layout_marginBottom="20dp"
         android:text="LOGIN"
-        android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="128dp" />
+        app:layout_constraintBottom_toTopOf="@+id/txt_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <EditText
         android:id="@+id/txt_username"
         android:layout_width="wrap_content"

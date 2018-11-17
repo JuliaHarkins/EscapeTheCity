@@ -8,9 +8,8 @@
 
     <TextView
         android:id="@+id/lb_leaderboard"
-        style="@style/FormLabel"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_element_height"
+        android:layout_height="40dp"
         android:layout_marginStart="123dp"
         android:layout_marginLeft="123dp"
         android:layout_marginTop="36dp"
