@@ -34,8 +34,8 @@ public class LocationRiddleActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_UserLocation);
-        bmapFragment.getMapAsync(this);
+        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_UserLocation);
+        bmapFragment.getMapAsync(this);*/
 
         setContentView(R.layout.locationriddle);
 
@@ -78,6 +78,7 @@ public class LocationRiddleActivity extends Activity {
 
         if(trail.isTrailFinished()){
             Intent i = new Intent(getApplicationContext(),LeaderBoardActivity.class);
+            i.putExtra("secondsDelayed",secondsDelayed);
             startActivity(i);
             handler.removeCallbacks(runnable);
         }else{

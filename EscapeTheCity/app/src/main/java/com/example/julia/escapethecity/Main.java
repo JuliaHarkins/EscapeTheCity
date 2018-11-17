@@ -21,6 +21,7 @@ public class Main extends AppCompatActivity{
 
     LocationManager lm;
     public static double latitude,longitude,elevation;
+    public static String username;
 
     ArrayList<TrailClue> tempClues = new ArrayList<TrailClue>();
     ArrayList<TrailClue> demoTrail = new ArrayList<TrailClue>();
@@ -95,6 +96,9 @@ public class Main extends AppCompatActivity{
         final Button button = findViewById(R.id.btn_login);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                username = findViewById(R.id.txt_username).toString();
+
                 // Code here executes on main thread after user presses button
                 Intent i = new Intent(getApplicationContext(),TrailListActivity.class);
                 startActivity(i);
