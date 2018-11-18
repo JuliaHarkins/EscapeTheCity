@@ -2,6 +2,7 @@ package com.example.julia.escapethecity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,6 +11,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -89,7 +91,29 @@ public class Main extends AppCompatActivity{
         handler.postDelayed(runnable, 1000);
 
         addButtonHandlers();
+        addTextHandlers();
+    }
 
+    private void addTextHandlers(){
+        EditText username = findViewById(R.id.txt_username);
+        EditText password = findViewById(R.id.txt_password);
+
+        View.OnKeyListener okl = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(keyCode == KeyEvent.KEYCODE_ENTER){
+                    Button login = findViewById(R.id.btn_login);
+                    login.callOnClick();
+                    return true;
+                }
+
+                return false;
+            }
+        };
+
+        username.setOnKeyListener(okl);
+        password.setOnKeyListener(okl);
     }
 
     private void addButtonHandlers(){

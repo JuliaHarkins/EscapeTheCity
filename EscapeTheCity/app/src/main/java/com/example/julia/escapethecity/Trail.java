@@ -82,6 +82,10 @@ public class Trail {
             Scanner br = new Scanner(is);
             while(br.hasNext()) {
                 String line = br.nextLine();
+
+                if(line.startsWith("#")){
+                    continue;
+                }
                         String[] lines = line.split(",");
 
                 double lat = Double.parseDouble(lines[0]);

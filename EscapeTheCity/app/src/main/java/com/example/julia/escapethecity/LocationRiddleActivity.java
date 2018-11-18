@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.design.widget.TextInputEditText;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import java.io.InputStream;
+import java.net.URL;
 
 public class LocationRiddleActivity extends Activity {
 
@@ -52,7 +54,14 @@ public class LocationRiddleActivity extends Activity {
         setContentView(R.layout.locationriddle);
 
         trail = new Trail();
-        InputStream is = this.getApplicationContext().getResources().openRawResource(R.raw.trail1);
+        InputStream is;
+        try {
+            is = new URL("http://kiralee.ddns.net/trail1.txt").openStream();
+        }catch(Exception e){
+            Log.log("Cannot load input stream from url - returning built in instead");
+            Log.log(e.getMessage());
+            is = this.getApplicationContext().getResources().openRawResource(R.raw.trail2);
+        }
         trail.fromInputStream(is);
         handler.postDelayed(runnable,1000);
 
@@ -77,6 +86,28 @@ public class LocationRiddleActivity extends Activity {
 
         tb.setVisibility(v);
         submit.setVisibility(v);
+
+        addTextListeners();
+    }
+
+    public void addTextListeners(){
+        EditText answer = findViewById(R.id.txt_answerBox);
+
+        View.OnKeyListener okl = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(keyCode == KeyEvent.KEYCODE_ENTER){
+                    Button login = findViewById(R.id.btn_submitAnswer);
+                    login.callOnClick();
+                    return true;
+                }
+
+                return false;
+            }
+        };
+
+        answer.setOnKeyListener(okl);
     }
 
     public void debug(){

@@ -1,0 +1,4 @@
+#First clue is at college
+#Todo add clues
+52.766239,0.410421,Who's house is this?,Shaun
+52.766576,0.409396,What colour is the sky?,Black

@@ -25,28 +25,26 @@
         android:id="@+id/txt_locationRiddle"
         android:layout_width="342dp"
         android:layout_height="110dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="201dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="I reach for the sky, but clutch to the ground sometimes i leave, but i am always around."
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map_UserLocation" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txt_answerBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginBottom="142dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="144dp"
         android:ems="10"
+        android:hint="Answer"
         android:inputType="textPersonName"
-        android:text="Answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -54,11 +52,13 @@
         android:id="@+id/btn_submitAnswer"
         android:layout_width="117dp"
         android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="144dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_answerBox" />
 
     <TextView
         android:id="@+id/txt_debug"

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -41,11 +42,11 @@ public class LeaderBoardActivity extends Activity {
     }
 
     public void displayLeaderboard(){
-        RecyclerView rv = findViewById(R.id.txt_leaderboardList);
+        //RecyclerView rv = findViewById(R.id.txt_leaderboardList);
         //rv.
-        EditText et1 = findViewById(R.id.txt_leader1);
-        EditText et2 = findViewById(R.id.txt_leader2);
-        EditText et3 = findViewById(R.id.txt_leader3);
+        TextView et1 = findViewById(R.id.txt_leader1);
+        TextView et2 = findViewById(R.id.txt_leader2);
+        TextView et3 = findViewById(R.id.txt_leader3);
 
         NavigableSet<Integer> sortedKeys = leaderBoard.descendingKeySet();
         Iterator<Integer> i = sortedKeys.descendingIterator();
