@@ -3,19 +3,25 @@ package com.example.julia.escapethecity;
 import android.location.Location;
 import android.location.LocationManager;
 
+import java.util.ArrayList;
+
 public class TrailClue {
 
-    public static final double CLUE_RADIUS = Double.MAX_VALUE;
+    public static double CLUE_RADIUS = Double.MAX_VALUE;
     double latitude, longitude;
     String clue, answer;
+    String[] answers;
     boolean isFinished=false;
 
     public TrailClue(double latitude, double longitude, String clue, String answer){
+        this(latitude,longitude,clue,new String[]{answer});
+    }
+
+    public TrailClue(double lat, double lon, String clue, String... answers){
         this.latitude=latitude;
         this.longitude=longitude;
         this.clue=clue;
-        this.answer=answer;
-        this.answer = this.answer.toLowerCase();
+        this.answers=answers;
     }
 
     public boolean isClueInRange(double phoneLat, double phoneLong){
@@ -35,7 +41,13 @@ public class TrailClue {
         answer = answer.toLowerCase();
 
         isFinished=true;
-        return(this.answer.contains(answer));
+        //return(this.answer.contains(answer));
+        for(String s : answers){
+            if(s.matches(answer)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isFinished(){

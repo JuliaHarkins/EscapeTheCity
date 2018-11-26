@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Main extends AppCompatActivity{
@@ -39,12 +41,29 @@ public class Main extends AppCompatActivity{
     };
 
     private LocationListener locationListener;
+    public static InputStream clueInputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    InputStream is = new URL("http://kiralee.ddns.net/trail1.txt").openStream();
+                    clueInputStream=is;
+                    Log.log("Opened input stream: "+is);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+            }
+        });
+
+        thread.start();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

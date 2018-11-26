@@ -7,9 +7,12 @@ import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
@@ -21,6 +24,8 @@ public class LocationRiddleActivity extends Activity {
 
     private int gpsCoolDown = 0;
     private final int MAX_GPS_COOLDOWN = 5;
+    public static boolean IS_DEBUG=false;
+    private static final double NON_DEBUG_CLUE_RADIUS = 5;
 
 
     Trail trail;
@@ -54,15 +59,14 @@ public class LocationRiddleActivity extends Activity {
         setContentView(R.layout.locationriddle);
 
         trail = new Trail();
-        InputStream is;
-        try {
-            is = new URL("http://kiralee.ddns.net/trail1.txt").openStream();
-        }catch(Exception e){
-            Log.log("Cannot load input stream from url - returning built in instead");
-            Log.log(e.getMessage());
-            is = this.getApplicationContext().getResources().openRawResource(R.raw.trail2);
+        InputStream is=this.getApplicationContext().getResources().openRawResource(R.raw.trail1);
+
+        if(Main.clueInputStream == null){
+            trail.fromInputStream(is);
+        }else{
+            trail.fromInputStream(Main.clueInputStream);
         }
-        trail.fromInputStream(is);
+
         handler.postDelayed(runnable,1000);
 
         findViewById(R.id.btn_submitAnswer).setOnClickListener(new View.OnClickListener() {
@@ -88,6 +92,14 @@ public class LocationRiddleActivity extends Activity {
         submit.setVisibility(v);
 
         addTextListeners();
+
+        Switch debugSwitch = this.findViewById(R.id.switch1);
+        debugSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                TrailClue.CLUE_RADIUS = isChecked ? Double.MAX_VALUE : NON_DEBUG_CLUE_RADIUS;
+                IS_DEBUG=isChecked;
+            }
+        });
     }
 
     public void addTextListeners(){
@@ -113,7 +125,7 @@ public class LocationRiddleActivity extends Activity {
     public void debug(){
         TextView tv = findViewById(R.id.txt_debug);
         String debug = "Clue Radius: "+TrailClue.CLUE_RADIUS+ "Phone lat: "+Main.latitude+" long: "+Main.longitude+" Clue lat: "+trail.getCurrentClue().latitude+" clue long "+trail.getCurrentClue().longitude+ " distance: "+trail.getCurrentClue().distanceFromPhone(Main.latitude,Main.longitude,Main.elevation);
-        tv.setText(debug);
+        tv.setText(IS_DEBUG ? debug : "");
     }
 
     public void updateClueBox(){

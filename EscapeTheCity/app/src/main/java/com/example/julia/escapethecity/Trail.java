@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Trail {
@@ -91,9 +93,9 @@ public class Trail {
                 double lat = Double.parseDouble(lines[0]);
                 double lon = Double.parseDouble(lines[1]);
                 String clue = lines[2];
-                String answer = lines[3];
+                String[] answers = Arrays.copyOfRange(lines,3,lines.length);
 
-                TrailClue tc = new TrailClue(lat, lon, clue, answer);
+                TrailClue tc = new TrailClue(lat, lon, clue, answers);
                 clues.add(tc);
             }
         }catch(Exception e){
