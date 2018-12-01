@@ -18,15 +18,34 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends AppCompatActivity{
 
     LocationManager lm;
     public static double latitude,longitude,elevation;
-    public static String username;
+    public static String username = "";
+    public static String password = "";
 
     ArrayList<TrailClue> tempClues = new ArrayList<TrailClue>();
     ArrayList<TrailClue> demoTrail = new ArrayList<TrailClue>();
@@ -42,6 +61,74 @@ public class Main extends AppCompatActivity{
 
     private LocationListener locationListener;
     public static InputStream clueInputStream;
+    boolean hasLoaded = false;
+    String response = "";
+
+
+
+    // TODO: fix this using this link: https://stackoverflow.com/questions/22755063/not-receiving-params-in-php-from-android-post
+    public void loadTrailFromURL(){
+        Log.log("loadTrailFromURL");
+        try {
+            /*URL url = new URL("http://kiralee.ddns.net/etc.php");
+            String data = URLEncoder.encode("username", "UTF-8")
+                    + "=" + URLEncoder.encode(username, "UTF-8");
+            data += "&" + URLEncoder.encode("password", "UTF-8")
+                    + "=" + URLEncoder.encode(password, "UTF-8");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            BufferedReader reader = new BufferedReader(new
+                    InputStreamReader(conn.getInputStream()));
+
+            String line="";
+
+            while((line = reader.readLine()) != null){
+                Log.log(line);
+                InputStream is = new URL(line).openStream();
+                clueInputStream=is;
+                Log.log("Opened input stream: "+is);
+            }*/
+            /*HttpClient httpClient = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://kiralee.ddns.net/etc.php");
+            //post.setHeader("content-type", "application/json");
+            List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            pairs.add(new BasicNameValuePair("username", username));
+            pairs.add(new BasicNameValuePair("password", password));
+            post.setEntity(new UrlEncodedFormEntity(pairs));
+
+            HttpResponse resp = httpClient.execute(post);
+            String line = EntityUtils.toString(resp.getEntity());*/
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://kiralee.ddns.net/etc.php");
+            List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            pairs.add(new BasicNameValuePair("username", username));
+            pairs.add(new BasicNameValuePair("password", password));
+            httppost.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
+            HttpResponse response = httpclient.execute(httppost); // Execute Post to URL
+            String st = EntityUtils.toString(response.getEntity()); // This is the result from php web
+            String line = st; // You should register a variable for finalResult;
+            Log.log("Response from server is: ["+line+"]");
+
+            hasLoaded = true;
+
+            this.response = line;
+            if(line.contains("ERROR")){
+                return;
+            }
+
+            InputStream is = new URL(line).openStream();
+            clueInputStream=is;
+            Log.log("Opened input stream: "+is);
+        }catch(Exception e){
+            Log.log(e.getMessage());
+            e.printStackTrace();
+            hasLoaded=true;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +140,9 @@ public class Main extends AppCompatActivity{
             @Override
             public void run() {
                 try  {
-                    InputStream is = new URL("http://kiralee.ddns.net/trail1.txt").openStream();
-                    clueInputStream=is;
-                    Log.log("Opened input stream: "+is);
+//                    InputStream is = new URL("http://kiralee.ddns.net/trail1.txt").openStream();
+//                    clueInputStream=is;
+//                    Log.log("Opened input stream: "+is);
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -143,11 +230,41 @@ public class Main extends AppCompatActivity{
 
                 username = findViewById(R.id.txt_username).toString();
                 EditText et = findViewById(R.id.txt_username);
+                EditText pt = findViewById(R.id.txt_password);
                 username=et.getText().toString();
+                password=pt.getText().toString();
 
-                // Code here executes on main thread after user presses button
-                Intent i = new Intent(getApplicationContext(),TrailListActivity.class);
-                startActivity(i);
+                button.setEnabled(false);
+
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadTrailFromURL();
+                    }
+                });
+                t.start();
+
+                // Wait until the text file has been loaded correctly
+                do{
+                    try {
+                        Thread.sleep(1000);
+                    }catch(Exception e){
+                        Log.log(e.getMessage());
+                        e.printStackTrace();
+                        button.setEnabled(false);
+                    }
+                }while(!hasLoaded);
+
+                button.setEnabled(true);
+
+                if(!response.contains("ERROR")) {
+                    Log.log("Response is not error, continuing to new activity");
+                    // Code here executes on main thread after user presses button
+                    Intent i = new Intent(getApplicationContext(), TrailListActivity.class);
+                    startActivity(i);
+                }else{
+                    Log.log("Response apparently contains error: ["+response+"] not continuing");
+                }
             }
         });
     }
